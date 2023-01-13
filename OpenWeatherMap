@@ -1,0 +1,21 @@
+try:
+    import requests
+except ModuleNotFoundError:
+    print("Requests module not installed or found")
+    exit(0)
+import math
+
+while True:
+    city = str(input("Enter a city name or a country name: "))
+    api = input("Enter an API Key: ")
+
+    try:
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api}"
+        response = requests.get(url).json()
+    except RuntimeError:
+        print("Invalid city name or API Key")
+        exit(0)
+
+    temperature = response['main']['temp']
+    temperature = math.floor(temperature - 273.15)
+    print(f"\nThe temperature in {city} is {temperature} degree celsius!")
