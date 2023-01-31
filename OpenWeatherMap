@@ -29,6 +29,8 @@ if __name__ == '__main__':
         # Attaining weather data
         try:
             city_temperature = int(API_data['main']['temp'])
+            if city_temperature is None:
+                raise IndexError("City stats not found.")
             city_temperature = math.floor(city_temperature - 273.15)
 
             feels_like_temp = API_data['main']['feels_like']
